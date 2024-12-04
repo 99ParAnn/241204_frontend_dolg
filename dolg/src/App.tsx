@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+interface product{
+  id: number, 
+  name: string,
+  amount: number,
+  unit: string,
+  bought: boolean
+}
 import './App.css'
+const productList:product[] = []
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  const exampleProduct:product = {
+    id: 0,
+    name: "a",
+    amount: 1,
+    unit: "b",
+    bought: false
+  }
+   productList.push(exampleProduct)
+  MakeTable();
+
+
+
+
+
+  return;
+}
+function MakeTable(){
+  const tableContent = document.getElementById("dynamicTable");
+  productList.forEach(product => {
+    const newLine = `
+    <tr>
+    <td>
+    ${product.name}
+    </td>
+    <td>
+    ${product.amount} ${product.unit}
+    </td>
+    <td>
+    Megvásárolva vagy nem
+    </td>
+    <td>
+    Törlés gomb
+    </td> 
+    </tr>
+    `;
+    tableContent!.innerHTML += newLine;
+  });
 }
 
 export default App
